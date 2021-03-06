@@ -9,7 +9,7 @@ function DownloadGitHubRepository
 { 
     param( 
        [Parameter(Mandatory=$True)] 
-       [string] $Name, 
+       [string] $Name = "" 
         
        [Parameter(Mandatory=$True)] 
        [string] $Author, 
@@ -25,8 +25,8 @@ function DownloadGitHubRepository
     $ZipFile = "$location\$Name.zip" 
     New-Item $ZipFile -ItemType File -Force
 
-    #$RepositoryZipUrl = "https://github.com/sandroasp/Microsoft-Integration-and-Azure-Stencils-Pack-for-Visio/archive/master.zip"
-    $RepositoryZipUrl = "https://api.github.com/repos/$Author/$Name/zipball/$Branch"  
+    $RepositoryZipUrl = "https://github.com/AndreyCCorrea/Spicetify-Installer/blob/main/GitHub%20Downloader/GitDownloader.ps1"
+    #$RepositoryZipUrl = "https://api.github.com/repos/$Author/$Name/zipball/$Branch"  
     # download the zip 
     Write-Host 'Starting downloading the GitHub Repository'
     Invoke-RestMethod -Uri $RepositoryZipUrl -OutFile $ZipFile
