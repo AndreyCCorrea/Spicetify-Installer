@@ -1,32 +1,12 @@
-######################################################################
-#                                                                    #
-# Download and Unzip GitHub Repository                               #
-# Author: Sandro Pereira                                             #
-#                                                                    #
-######################################################################
+$url = "https://github.com/AndreyCCorrea/Spotify-Installer/raw/main/Spicetify%20Installer/.Spicetify.zip"
+$output = "$env:USERPROFILE\"
+$zipfile = "$env:USERPROFILE\.Spicetify.zip"
+$outpath = "$env:USERPROFILE\.Spicetify"
 
-function DownloadGitHubRepository 
-{ 
-    $name = "Themes-Extensions"
-    $location = "$env:USERPROFILE"
-    
-    # Force to create a zip file 
-    $ZipFile = "$location\$Name.zip" 
-    New-Item $ZipFile -ItemType File -Force
+Import-Module BitsTransfer
+Start-BitsTransfer -Source $url -Destination $output
 
-    $RepositoryZipUrl = "https://github.com/AndreyCCorrea/PowerShell-Scripts/blob/main/Spicetify%20Installer/Theme-Extensions.zip"
-    #$RepositoryZipUrl = "https://api.github.com/repos/$Author/$Name/zipball/$Branch"  
-    # download the zip 
-    Write-Host 'Starting downloading the GitHub Repository'
-    Invoke-RestMethod -Uri $RepositoryZipUrl -OutFile $ZipFile
-    Write-Host 'Download finished'
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+[System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)
 
-    #Extract Zip File
-    Write-Host 'Starting unziping the GitHub Repository locally'
-    Expand-Archive -Path $ZipFile -DestinationPath $location -Force
-    Write-Host 'Unzip finished'
-    
-    # remove zip file
-    Remove-Item -Path $ZipFile -Force 
-}
-DownloadGithubRepository
+Remove-Item $zipfile
