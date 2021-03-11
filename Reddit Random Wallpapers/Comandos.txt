@@ -1,0 +1,10 @@
+#Extrair o arquivo ZIP em:
+Disco Local \ Usuários \ Usuário \ Documents \ WindowsPowerShell \ Modules
+
+#Executar os seguintes comandos no Powershell em modo normal.
+Import-Module SetLDSWallpaper
+Import-Module SetRandomWallpaper
+import-Module SetSetScheduleWallpaper
+
+#Para mudar o wallpaper, execute o comando:
+Set-ScheduleWallpaper
